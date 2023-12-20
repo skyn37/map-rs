@@ -13,6 +13,7 @@ pub struct DirInfo {
     size: u64, 
     total_size: u64,
     percent_of_total: f64,
+    percent_of_parent: f64,
     root_percent_of_total: f64,
     file_counter: u64,
     path: PathBuf,
@@ -36,11 +37,18 @@ impl DirInfo {
         self.percent_of_total = if self.root {
             100.0
         } else {
-            (self.size as f64 / root_total_size as f64) * 100.0
+            (self.size as f64 / root_total_size as f64) * 100.0  
         };
 
         for child in &mut self.children {
             child.calculate_percentages(root_total_size);
+        }
+    }
+
+    fn calculate_percent_of_parent(&mut self, totalsize: u64) {
+        for child in &mut self.children {
+            child.percent_of_parent = (child.total_size as f64 /  totalsize as f64) * 100.0);
+            child.calculate_percent_of_parent(child.total_size);
         }
     }
 }
@@ -65,6 +73,7 @@ fn main () {
         size: 0,
         total_size: 0,
         percent_of_total: 0.0,
+        percent_of_parent: 0.0,
         root_percent_of_total: 0.0,
         file_counter: 0,
         root: true,
@@ -77,9 +86,9 @@ fn main () {
 
     dir_info.calculate_total_size();
     dir_info.calculate_percentages(dir_info.total_size);
-
-    draw::noise(dir_info);
- //   println!("{dir_info:#?}");
+    dir_info.calculate_percent_of_parent(dir_info.total_size);
+   println!("{dir_info:#?}");
+ //   draw::noise(dir_info);
 }
 
 
@@ -99,6 +108,7 @@ fn eval_dir(path: &Path, dir_info: &mut DirInfo,  depth: usize) {
                         size: 0,
                         total_size: 0,
                         percent_of_total: 0.0,
+                        percent_of_parent: 0.0,
                         root_percent_of_total: 0.0,
                         file_counter: 0,
                         root: false,
