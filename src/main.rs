@@ -3,10 +3,11 @@ use std::path::Path;
 use std::path::PathBuf;
 use std::env;
 
+mod draw;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
-struct DirInfo {
+pub struct DirInfo {
     root: bool,
     name: String,
     size: u64, 
@@ -77,8 +78,8 @@ fn main () {
     dir_info.calculate_total_size();
     dir_info.calculate_percentages(dir_info.total_size);
 
-
-    //println!("{dir_info:#?}");
+    draw::noise(dir_info);
+ //   println!("{dir_info:#?}");
 }
 
 

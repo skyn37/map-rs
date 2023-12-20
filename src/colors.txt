@@ -1,0 +1,11 @@
+
+Black	0x000000
+Blue 	0x0000FF
+Gray 	0x808080
+Green	0x008000
+Purple  0x800080
+White	0xFFFFFF
+
+
+
+
