@@ -47,7 +47,7 @@ impl DirInfo {
 
     fn calculate_percent_of_parent(&mut self, totalsize: u64) {
         for child in &mut self.children {
-            child.percent_of_parent = (child.total_size as f64 /  totalsize as f64) * 100.0);
+            child.percent_of_parent = (child.total_size as f64 /  totalsize as f64) * 100.0;
             child.calculate_percent_of_parent(child.total_size);
         }
     }
@@ -88,7 +88,7 @@ fn main () {
     dir_info.calculate_percentages(dir_info.total_size);
     dir_info.calculate_percent_of_parent(dir_info.total_size);
    println!("{dir_info:#?}");
- //   draw::noise(dir_info);
+    draw::noise(dir_info);
 }
 
 
