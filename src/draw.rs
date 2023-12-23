@@ -2,7 +2,7 @@ use minifb::{Key, Window, WindowOptions, KeyRepeat};
 use std::cmp::min;
 use crate::DirInfo;
 use std::time::{SystemTime, Instant};
-
+use crate::random;
 
 const WIDTH: usize = 650;
 const HEIGHT: usize = 650;

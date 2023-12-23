@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use std::env;
 
 mod draw;
-
+mod random;
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct DirInfo {
