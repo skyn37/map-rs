@@ -1,11 +1,9 @@
-
-use std::time::{SystemTime, Instant};
+use std::time::Instant;
 
 
 pub fn generate_random_hex_color() -> u32 {
     let seed = Instant::now().elapsed().subsec_nanos() as u32;
     let mut rng = Lcg::new(seed);
-
     rng.next()
 }
 
