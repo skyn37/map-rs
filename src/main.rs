@@ -90,10 +90,7 @@ fn main () {
     dir_info.calculate_total_size();
     dir_info.calculate_percentages(dir_info.total_size);
     dir_info.calculate_percent_of_parent(dir_info.total_size);
-println!("{dir_info:#?}");
-
-    sort_dir_info_by_total_size(&mut dir_info);
-   println!("{dir_info:#?}");
+    println!("{dir_info:#?}");
     draw::noise(dir_info);
 }
 
@@ -136,7 +133,6 @@ fn eval_dir(path: &Path, dir_info: &mut DirInfo,  depth: usize) {
                     dir_info.file_counter += 1;
                     if let Ok(metadata) = fs::metadata(content.path()) {
                         dir_info.size += metadata.len();
-
                     }
                 }
             }
