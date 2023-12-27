@@ -90,6 +90,7 @@ fn main () {
     dir_info.calculate_total_size();
     dir_info.calculate_percentages(dir_info.total_size);
     dir_info.calculate_percent_of_parent(dir_info.total_size);
+    sort_dir_info_by_size(&mut dir_info);
     println!("{dir_info:#?}");
     draw::noise(dir_info);
 }
@@ -97,11 +98,11 @@ fn main () {
 
 
 
-fn sort_dir_info_by_total_size(dir_info: &mut DirInfo) {
-    dir_info.children.sort_by(|a, b| a.total_size.cmp(&b.total_size));
+fn sort_dir_info_by_size(dir_info: &mut DirInfo) {
+    dir_info.children.sort_by(|a, b| a.size.cmp(&b.size));
 
     for child in &mut dir_info.children {
-        sort_dir_info_by_total_size(child);
+        sort_dir_info_by_size(child);
     }
 }
 
